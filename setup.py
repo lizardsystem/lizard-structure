@@ -10,17 +10,15 @@ long_description = '\n\n'.join([
 
 install_requires = [
     'Django',
-    'django-extensions',
     'django-nose',
-    'lizard-ui >= 4.0b5',
+    'djangorestframework >= 2.0',
+    'south',
     ],
-
-tests_require = [
-    ]
 
 setup(name='lizard-structure',
       version=version,
-      description="Structure of Lizard, defined and documented in a REST interface",
+      description=("Structure of Lizard, defined and documented " +
+                   "in a REST interface"),
       long_description=long_description,
       # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=['Programming Language :: Python',
@@ -35,8 +33,6 @@ setup(name='lizard-structure',
       include_package_data=True,
       zip_safe=False,
       install_requires=install_requires,
-      tests_require=tests_require,
-      extras_require = {'test': tests_require},
       entry_points={
           'console_scripts': [
           ]},
