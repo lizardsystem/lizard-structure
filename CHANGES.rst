@@ -5,7 +5,7 @@ Changelog of lizard-structure
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Using version from ``setup.py`` in the sphinx documentation.
 
 
 0.1 (2012-12-05)
