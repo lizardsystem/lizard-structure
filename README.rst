@@ -16,3 +16,5 @@ Most important project links
 - Documentation on readthedocs.org: https://lizard-structure.readthedocs.org/
 
 - Tested on travis: https://travis-ci.org/lizardsystem/lizard-structure .
+
+- Installable via pypi: http://pypi.python.org/pypi/lizard-structure .
