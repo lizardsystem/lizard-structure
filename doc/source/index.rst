@@ -7,7 +7,7 @@ interface**.
 `Lizard <http://lizard.org>`_ is a framework for showing water-related
 information in a web interface. We build most of what's now Lizard in the
 `Python <http://python.org>`_ web framework `Django
-<http://djangoproject.com>`_). We're now separating the various bits and
+<http://djangoproject.com>`_. We're now separating the various bits and
 pieces more formally with a `REST
 <https://en.wikipedia.org/wiki/Representational_state_transfer>`_ web
 API.
