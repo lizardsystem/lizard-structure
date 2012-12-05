@@ -5,10 +5,13 @@
 # serve to show the default.
 
 import datetime
+import os
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'lizard_structure.testsettings'
 
 project = "lizard_structure"
-author = ""
-version = ""
+author = "Reinout van Rees"
+version = "0.1"
 release = ""
 this_year = datetime.date.today().year
 copyright = '%s, %s' % (this_year, author)

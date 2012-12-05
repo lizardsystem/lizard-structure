@@ -37,6 +37,7 @@ SITE_ID = 1
 SECRET_KEY = 'This is not secret but that is ok.'
 INSTALLED_APPS = [
     'lizard_structure',
+    'rest_framework',
     'south',
     'django_nose',
     'django.contrib.staticfiles',
