@@ -1,5 +1,5 @@
-Introducing the core Lizard concepts
-####################################
+Introducing the four core Lizard concepts
+#########################################
 
 There are four core concepts in Lizard's structure:
 
@@ -23,6 +23,15 @@ Feature
 
     A :ref:`layer` consists of features. A map layer might show water
     level measurement points: every one of those is a :ref:`feature`.
+
+.. note::
+
+   There are four levels. No more. That's Lizard's structure! You could call
+   it **Lizard's world view**. Most of what we encountered in the Lizard
+   websites of the last couple of years fits this structure. And if you need
+   something extra special, you can just create a regular Lizard Django
+   application and you'll have all the freedom to do weird things that you can
+   wish for.
 
 
 .. _application:
@@ -66,7 +75,11 @@ you want: fine. If not: you need to re-think what you're calling a project.
 Layer
 =====
 
-TODO
+A layer is best understood as simply a map layer. One of the map layers you
+place over a google or openstreetmap base map. It doesn't really matter
+whether it is a WMS layer or geojson or even a simple non-map list of items:
+for the concept you simply need to think "map layer" and you've got the
+correct mental picture.
 
 
 .. _feature:
@@ -74,4 +87,14 @@ TODO
 Feature
 =======
 
-TODO
+If a :ref:`layer` is basically a map layer, a :ref:`feature` is an item on
+that map layer. A river, a dike segment, a water level measurement. A feature
+is the lowest useful level of information.
+
+The best way to think about a feature is of something that you can click on on
+a map. You click it and you get a graph of the data. Or a table with more
+information. Or a PDF.
+
+And in case the :ref:`layer` wasn't a map layer but just a list of features,
+it still holds true that a feature is something with a table, graph or PDF. In
+this case it simply is one of the items in that list.
