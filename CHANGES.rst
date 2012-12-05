@@ -2,7 +2,7 @@ Changelog of lizard-structure
 ===================================================
 
 
-0.1 (unreleased)
+0.1 (2012-12-05)
 ----------------
 
 - Documented the four core Lizard concepts. [reinout]
