@@ -4,15 +4,21 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import datetime
 import os
-
 os.environ['DJANGO_SETTINGS_MODULE'] = 'lizard_structure.testsettings'
+# ^^^ First things first.
 
-project = "lizard_structure"
-author = "Reinout van Rees"
-version = "0.1"
-release = ""
+import datetime
+import pkginfo
+
+import lizard_structure
+
+metadata = pkginfo.utils.get_metadata(lizard_structure)
+
+project = metadata.name
+author = metadata.author
+version = metadata.version
+release = metadata.version
 this_year = datetime.date.today().year
 copyright = '%s, %s' % (this_year, author)
 # Comment out one of these if we're a django project.
