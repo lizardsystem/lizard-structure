@@ -5,6 +5,8 @@ Changelog of lizard-structure
 0.1 (unreleased)
 ----------------
 
+- Documented the four core Lizard concepts.
+
 - Set up documentation generation at https://lizard-structure.readthedocs.org/ .
 
 - Set up testing on travis:
