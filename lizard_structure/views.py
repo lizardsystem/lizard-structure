@@ -1,6 +1,6 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.rst.
 """
-The basic premise is that lizard-structure only *shows* the application's
+The basic premise is that lizard-structure only *shows* a data source's
 structure. There are no edit actions, so no POST/PUT/DELETE: only GET.
 
 There are several basic ways to deal with naming the views. Especially when
@@ -8,12 +8,12 @@ you also want POST/PUT/DELETE, having both ``ObjectList`` and ``ObjectDetail``
 makes sense. But we don't need that. What's most interesting are the lists,
 these are also often the most effective. You don't want to have to grab
 handfuls of URLs before you can render a page. You want the most useful data
-right away. So on an :ref:`application` page, you want a list of projects. On
+right away. So on an :ref:`data source` page, you want a list of projects. On
 a :ref:`project` page, a list of layers. And so on.
 
-We deemed it more useful to call the view with the list of projects the
-application view, though. An application *is* a list of projects, so it makes
-sense that way.
+We deemed it more useful to call the view with the list of projects the data
+source view, though. A data source *is* a list of projects, so it makes sense
+that way.
 
 But: a project also has information on itself, as has a project, etc.
 
@@ -26,9 +26,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-class ApplicationView(APIView):
+class DataSourceView(APIView):
     """
-    Information about the application and its list of projects.
+    Information about the data source and its list of projects.
     """
     pass
 

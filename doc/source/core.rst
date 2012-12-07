@@ -3,14 +3,14 @@ Introducing the four core Lizard concepts
 
 There are four core concepts in Lizard's structure:
 
-Application
+Data source
 
-    Lizard can connect to a lot of data sources; an application provides such
-    a connection. So :ref:`application` more or less equals "data source".
+    Lizard can connect to many kinds of data. A :ref:`data source` provides
+    such a connection.
 
 Project
 
-    Within an :ref:`application`, there will be one or more basic groups of
+    Within an :ref:`data source`, there will be one or more basic groups of
     data. Every group of data is what we call a :ref:`project`.
 
 Layer
@@ -34,24 +34,24 @@ Feature
    wish for.
 
 
-.. _application:
+.. _`data source`:
 
-Application
+Data source
 ===========
 
-Lizard is organized around applications. The main Lizard characteristic is
-that it can show data from many different sources. (With "show" we can mean
-quite elaborate web interfaces, btw.) For every data source, there is a
-separate application. One to read FEWS data from a database. Another to read
-it from a JDBC coupling. One to link to geoserver WMS layers. Another to show
-river dike calculations.
+A main Lizard characteristic is that it can show data from many different
+sources. (With "show" we can mean quite elaborate web interfaces, btw.) For
+every data source, there is a separate Lizard Django application
+(currently). One to read FEWS data from a database. Another to read it from a
+JDBC coupling. One to link to geoserver WMS layers. Another to show river dike
+calculations.
 
 So in the end, if a Lizard website connects to you via the lizard-structure
-API, Lizard connects with you as an application.
+API, Lizard connects with you as a data source.
 
-You, as an application, are the starting point for Lizard to talk to
-you. You'll give lizard a list of projects which it can display in its
-interface, for instance.
+You, as a data surce, are the starting point for Lizard to talk to you. You'll
+give lizard a list of projects which it can display in its interface, for
+instance.
 
 
 .. _project:
@@ -59,11 +59,11 @@ interface, for instance.
 Project
 =======
 
-A project is a large-scale grouping of the data available in an
-:ref:`application`. Do not have too many of these. As an example: if your
-application provides water level measurements, a good project level might be
-the water board or municipality or whatever you have as top-level customer. So
-every municipality becomes a :ref:`project`.
+A project is a large-scale grouping of the data available in an :ref:`data
+source`. Do not have too many of these. As an example: if your data source
+provides water level measurements, a good project level might be the water
+board or municipality or whatever you have as top-level customer. So every
+municipality becomes a :ref:`project`.
 
 The goal you need to keep in mind here is that a :ref:`project` often
 translates into a separate page in the Lizard web interface. If that is what

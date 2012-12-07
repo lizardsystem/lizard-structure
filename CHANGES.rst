@@ -5,6 +5,10 @@ Changelog of lizard-structure
 0.2 (unreleased)
 ----------------
 
+- Renamed "application" to "data source" as "application" looks too much like
+  "Django application". Inside Lizard, the icons in lizard-ui's interface are
+  also called "application icons", so we don't use this overloaded term here.
+
 - Using version from ``setup.py`` in the sphinx documentation.
 
 
