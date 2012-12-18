@@ -24,32 +24,24 @@ DEFAULT_HEADING_LEVEL = 1
 
 class HeadingItem(object):
     """Wrapper/interface for heading objects in a Project/menu."""
-    menu_type = 'heading'
+    fixed = {'menu_type': 'heading'}
+    defaults = {'name': None,
+                'description': None,
+                'heading_level': DEFAULT_HEADING_LEVEL,
+                'extra_data': None,
+                'klass': None}
 
-    def __init__(self,
-                 name=None,
-                 description=None,
-                 # edit_link=None,
-                 heading_level=None,
-                 extra_data=None,
-                 klass=None):
-        self.name = name
-        self.description = description
-        self.heading_level = heading_level or DEFAULT_HEADING_LEVEL
-        # self.edit_link = edit_link
-        self.extra_data = extra_data
-        self.klass = klass
+    def __init__(self, **kwargs):
+        for kwarg in kwargs:
+            if kwarg not in self.defaults:
+                raise TypeError(
+                    "__init__() got an unexpected keyword argument {kwarg}",
+                    kwarg=kwarg)
+        self._dict = {}
+        self._dict.update(self.fixed)
+        self._dict.update(self.defaults)
+        self._dict.update(kwargs)
 
     def to_api(self):
-        result = {}
-        for attr in ['name',
-                     'description',
-                     'heading_level',
-                     # 'extra_data',
-                     # 'klass',
-                     'menu_type']:
-            value = getattr(self, attr)
-            if value is None:
-                continue
-            result[attr] = value
-        return result
+        return dict([(k, v) for (k, v) in self._dict.items()
+                     if v is not None])
