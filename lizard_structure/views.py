@@ -128,7 +128,7 @@ class DataSourceView(BaseAPIView):
         default "generator" is returned with our package name and version as
         returned by :meth:`our_name_and_version`.
         """
-        return {'generator': self.our_name_and_version}
+        return {'generator': self.our_name_and_version()}
 
     def get(self, request, format=None):
         """Return about_ourselves and projects as REST response."""
