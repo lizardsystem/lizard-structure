@@ -23,17 +23,48 @@ from __future__ import unicode_literals
 # from django.core.urlresolvers import reverse
 # from django.utils.translation import ugettext as _
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
+import pkginfo
 
 
-class DataSourceView(APIView):
+class DataSourceView(GenericAPIView):
     """
-    Information about the data source and its list of projects.
+    Information about the data source itself and its list of projects.
+
+    Use this to discover the projects you can show in your user interface.
     """
-    pass
+
+    @property
+    def projects(self):
+        """Return maptree categories.
+
+        Maptree categories are usable as root objects of lizard pages.
+        """
+        return []
+
+    @property
+    def our_name_and_version(self):
+        """Return name version number of our package.
+        """
+        our_module = self.__module__
+        package = our_module.split('.')[0]
+        version = pkginfo.installed.Installed(our_module).version
+        return '{package} ({version})'.format(package=package,
+                                              version=version)
+
+    @property
+    def about_ourselves(self):
+        """Return metadata about ourselves."""
+        return {'generator': self.our_name_and_version}
+
+    def get(self, response, format=None):
+        result = {}
+        result['about_ourselves'] = self.about_ourselves
+        result['projects'] = self.projects
+        return Response(result)
 
 
-class ProjectView(APIView):
+class ProjectView(GenericAPIView):
     """
     Information about the project and its list of layers.
     """
@@ -42,7 +73,7 @@ class ProjectView(APIView):
     pass
 
 
-class LayerView(APIView):
+class LayerView(GenericAPIView):
     """
     Information about the layer and its list of features.
     """
@@ -50,7 +81,7 @@ class LayerView(APIView):
     pass
 
 
-class FeatureView(APIView):
+class FeatureView(GenericAPIView):
     """
     Information about the feature and most importantly its representations.
     """
