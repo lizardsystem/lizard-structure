@@ -3,6 +3,13 @@
 Introducing the four core Lizard concepts
 #########################################
 
+.. note::
+
+   Warning, this is work in progress. Even though there currently are four
+   levels, there's a big chance that something is missing. It is very likely
+   that a "FilterFolder" or "FilterLayer" or something like that will be
+   added.
+
 There are four core concepts in Lizard's structure:
 
 Data source
