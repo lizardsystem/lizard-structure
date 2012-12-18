@@ -5,6 +5,9 @@ concepts defined in :ref:`chapter-core`. The basic premise is that
 lizard-structure only *shows* a data source's structure. There are no edit
 actions, so no POST/PUT/DELETE: only GET.
 
+For the Django API we use `Django REST framework
+<http://django-rest-framework.org/>`_.
+
 Every view has a doctring that can mostly be used as-is by the subclasses that
 implement the actual functionality. The docstring is rendered by Django REST
 framework in the html API interface, so the view's docstring is the most
@@ -12,14 +15,8 @@ important information your API user is going to see. The base views' docstring
 must be really clear and concise!
 
 You normally do not have to implement any ``.get()`` method on a view, that is
-all taken care of. Every view tells you which properties you have to fill in
-to get the base view working with your data.
-
-.. note::
-
-   Properties look like attributes on a class, but they're methods with a
-   ``@property`` decorator. You can also just add an attribute if you
-   want. See :func:`python:property`.
+all taken care of. Every view tells you which methods you have to fill in to
+get the base view working with your data.
 
 """
 from __future__ import unicode_literals
@@ -97,11 +94,10 @@ class DataSourceView(BaseAPIView):
 
     """
 
-    @property
     def projects(self):
         """Return list of projects.
 
-        Overwrite this property in your subclass and return a list of **TODO**
+        Overwrite this method in your subclass and return a list of **TODO**
         ProjectInfo dictionaries you create from whatever constitutes a
         project in your own models. To give you an idea, here are some example
         projects:
@@ -113,9 +109,9 @@ class DataSourceView(BaseAPIView):
         """
         return []
 
-    @property
     def our_name_and_version(self):
-        """Return name version number of our package.
+        """
+        Return automatically detected name and version number of our package.
 
         The default should be OK in most cases.
         """
@@ -125,19 +121,20 @@ class DataSourceView(BaseAPIView):
         return '{package} ({version})'.format(package=package,
                                               version=version)
 
-    @property
     def about_ourselves(self):
         """Return metadata about ourselves.
 
-        By default, return our name and version as the generator of the data
-        source.
+        The result should be a flat dictionary, so only key/value pairs. By
+        default "generator" is returned with our package name and version as
+        returned by :meth:`our_name_and_version`.
         """
         return {'generator': self.our_name_and_version}
 
-    def get(self, response, format=None):
+    def get(self, request, format=None):
+        """Return about_ourselves and projects as REST response."""
         result = {}
-        result['about_ourselves'] = self.about_ourselves
-        result['projects'] = self.projects
+        result['about_ourselves'] = self.about_ourselves()
+        result['projects'] = self.projects()
         return Response(result)
 
 
