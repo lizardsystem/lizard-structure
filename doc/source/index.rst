@@ -25,5 +25,5 @@ Here is the table of contents:
    :maxdepth: 2
 
    core
-   code
+   views
    project

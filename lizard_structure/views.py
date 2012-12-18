@@ -1,21 +1,25 @@
 # (c) Nelen & Schuurmans.  GPL licensed, see LICENSE.rst.
 """
-The basic premise is that lizard-structure only *shows* a data source's
-structure. There are no edit actions, so no POST/PUT/DELETE: only GET.
+:mod:`lizard_structure.views` provides base views for each of the core
+concepts defined in :ref:`chapter-core`. The basic premise is that
+lizard-structure only *shows* a data source's structure. There are no edit
+actions, so no POST/PUT/DELETE: only GET.
 
-There are several basic ways to deal with naming the views. Especially when
-you also want POST/PUT/DELETE, having both ``ObjectList`` and ``ObjectDetail``
-makes sense. But we don't need that. What's most interesting are the lists,
-these are also often the most effective. You don't want to have to grab
-handfuls of URLs before you can render a page. You want the most useful data
-right away. So on an :ref:`data source` page, you want a list of projects. On
-a :ref:`project` page, a list of layers. And so on.
+Every view has a doctring that can mostly be used as-is by the subclasses that
+implement the actual functionality. The docstring is rendered by Django REST
+framework in the html API interface, so the view's docstring is the most
+important information your API user is going to see. The base views' docstring
+must be really clear and concise!
 
-We deemed it more useful to call the view with the list of projects the data
-source view, though. A data source *is* a list of projects, so it makes sense
-that way.
+You normally do not have to implement any ``.get()`` method on a view, that is
+all taken care of. Every view tells you which properties you have to fill in
+to get the base view working with your data.
 
-But: a project also has information on itself, as has a project, etc.
+.. note::
+
+   Properties look like attributes on a class, but they're methods with a
+   ``@property`` decorator. You can also just add an attribute if you
+   want. See :func:`python:property`.
 
 """
 from __future__ import unicode_literals
@@ -32,6 +36,13 @@ import pkginfo
 
 
 class BaseAPIView(GenericAPIView):
+    """Base view that provides custom docstring rendering.
+
+    You should not have to subclass from :class:`BaseAPIView` yourself, it is
+    only used as a base for the other ones. The custom docstring handling
+    happens by overwriting the :meth:`get_description` expected by Django Rest
+    framework.
+    """
 
     def get_description(self, html=False):
         """Return the view's docstring as a description.
@@ -88,15 +99,25 @@ class DataSourceView(BaseAPIView):
 
     @property
     def projects(self):
-        """Return maptree categories.
+        """Return list of projects.
 
-        Maptree categories are usable as root objects of lizard pages.
+        Overwrite this property in your subclass and return a list of **TODO**
+        ProjectInfo dictionaries you create from whatever constitutes a
+        project in your own models. To give you an idea, here are some example
+        projects:
+
+        - Categories in lizard-wms/lizard-maptree.
+
+        - FEWS connections in lizard-fewsjdbc.
+
         """
         return []
 
     @property
     def our_name_and_version(self):
         """Return name version number of our package.
+
+        The default should be OK in most cases.
         """
         our_module = self.__module__
         package = our_module.split('.')[0]
@@ -106,7 +127,11 @@ class DataSourceView(BaseAPIView):
 
     @property
     def about_ourselves(self):
-        """Return metadata about ourselves."""
+        """Return metadata about ourselves.
+
+        By default, return our name and version as the generator of the data
+        source.
+        """
         return {'generator': self.our_name_and_version}
 
     def get(self, response, format=None):

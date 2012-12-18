@@ -1,3 +1,5 @@
+.. _`chapter-core`:
+
 Introducing the four core Lizard concepts
 #########################################
 
