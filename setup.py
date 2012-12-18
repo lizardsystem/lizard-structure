@@ -12,6 +12,7 @@ install_requires = [
     'Django',
     'django-nose',
     'djangorestframework >= 2.0',
+    'docutils',
     'pkginfo',
     'south',
     ],
