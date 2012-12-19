@@ -64,8 +64,8 @@ class BaseItem(object):
     def to_api(self):
         """Return our internal dictionary, but strip it of None values first.
         """
-        return dict([(k, v) for (k, v) in self._dict.items()
-                     if v is not None])
+        return dict((k, v) for (k, v) in self._dict.iteritems()
+                    if v is not None)
 
 
 class LayerTreeItem(BaseItem):
