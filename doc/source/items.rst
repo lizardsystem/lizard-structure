@@ -5,6 +5,13 @@ Item definitions: what key/value pairs to expect
 
 .. automodule:: lizard_structure.items
 
+
+Project
+--------------
+
+.. autoclass:: lizard_structure.items.ProjectItem
+
+
 Heading in a menu
 -----------------
 

@@ -97,10 +97,10 @@ class DataSourceView(BaseAPIView):
     def projects(self):
         """Return list of projects.
 
-        Overwrite this method in your subclass and return a list of **TODO**
-        ProjectInfo dictionaries you create from whatever constitutes a
-        project in your own models. To give you an idea, here are some example
-        projects:
+        Overwrite this method in your subclass and return a list of
+        :class:`lizard_structure.items.ProjectItem` instances you create from
+        whatever constitutes a project in your own models. To give you an
+        idea, here are some example projects:
 
         - Categories in lizard-wms/lizard-maptree.
 
@@ -134,7 +134,8 @@ class DataSourceView(BaseAPIView):
         """Return about_ourselves and projects as REST response."""
         result = {}
         result['about_ourselves'] = self.about_ourselves()
-        result['projects'] = self.projects()
+        result['projects'] = [project.to_api() for project in self.projects()]
+        # ^^^ TODO: do we want a dict here or do we grab .to_api() ourselves?
         return Response(result)
 
 

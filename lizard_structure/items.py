@@ -5,7 +5,7 @@ a formal specification of what kinds of key/value pairs you can expect in a
 JSON object (or Python dictionary) for such diverse items such as a layer, a
 menu item, a feature, a data source.
 
-Technically, an item is nothing but a Python class that returns a
+Technically, an item definition is nothing but a Python class that returns a
 dictionary. It is implemented as a class for the following reasons:
 
 - To make sure you comply to the specification. No undefined keys, no missing
@@ -103,6 +103,7 @@ def generate_docstring(name, bases, attrs):
             explanation=EXPLANATIONS.get(k)
             if explanation is None:
                 explanation = 'Optional.'
+                # TODO: perhaps raise an exception? Force documentation?
             if v is not None:
                 explanation += ' (**Default value**: {v}).'.format(
                     v=repr(v))
@@ -114,6 +115,14 @@ def generate_docstring(name, bases, attrs):
     return type(name, bases, attrs)
 
 
+class ProjectItem(BaseItem):
+    __metaclass__ = generate_docstring
+    defaults = {'name': None,
+                'description': None,
+                'url': None,
+                }
+
+
 class HeadingItem(BaseItem):
     """Wrapper/interface for heading objects in a Project/menu."""
     __metaclass__ = generate_docstring
@@ -122,7 +131,8 @@ class HeadingItem(BaseItem):
                 'description': None,
                 'heading_level': DEFAULT_HEADING_LEVEL,
                 'extra_data': None,
-                'klass': None}
+                'klass': None,
+                }
 
 
 class LayerItem(BaseItem):
