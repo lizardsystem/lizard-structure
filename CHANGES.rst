@@ -5,6 +5,14 @@ Changelog of lizard-structure
 0.2 (unreleased)
 ----------------
 
+- Added "item definitions" to properly document and specify items such as menu
+  headers and projects. Their end result is a dictionary that will be returned
+  as json by the API.
+
+- Added lots of documentation, including documentation generated from the
+  docstrings. The docstring documentation is carefully managed so that the
+  documentation as a whole remains clear and logical to read.
+
 - Renamed "application" to "data source" as "application" looks too much like
   "Django application". Inside Lizard, the icons in lizard-ui's interface are
   also called "application icons", so we don't use this overloaded term here.
