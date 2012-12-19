@@ -20,18 +20,40 @@ dictionary. It is implemented as a class for the following reasons:
 from __future__ import unicode_literals
 
 DEFAULT_HEADING_LEVEL = 1
+EXPLANATIONS = {
+    'name': 'Name of the item',
+    'description': """Description of the item, perhaps shown when hovering
+    above it. HTML tags are allowed so you can add links or definition links.
+""",
+    }
 
 
-class HeadingItem(object):
-    """Wrapper/interface for heading objects in a Project/menu."""
-    fixed = {'menu_type': 'heading'}
-    defaults = {'name': None,
-                'description': None,
-                'heading_level': DEFAULT_HEADING_LEVEL,
-                'extra_data': None,
-                'klass': None}
+class BaseItem(object):
+    """Base class for the other items.
+
+    Flexible implementation so that we only have to specify the fixed and the
+    default values (as dictionaries).
+
+    - Fixed values cannot be set with a keyword argument.
+
+    - Default arguments (``None`` is fine as value, btw) can be set using
+      keyword arguments, otherwise they get their default values.
+
+    - Keys with ``None`` values are omitted from the resulting dictionary
+      returned by :meth:`to_api`.
+
+    """
+    fixed = {}
+    defaults = {}
 
     def __init__(self, **kwargs):
+        """Set up the item's internal dictionary.
+
+        Keyword arguments can override default values. Only keys present in
+        :attr:`defaults` are allowed as keyword arguments. You cannot add your
+        own and you cannot override keys in :attr:`fixed`.
+
+        """
         for kwarg in kwargs:
             if kwarg not in self.defaults:
                 raise TypeError(
@@ -43,5 +65,55 @@ class HeadingItem(object):
         self._dict.update(kwargs)
 
     def to_api(self):
+        """Return our internal dictionary, but strip it of None values first.
+        """
         return dict([(k, v) for (k, v) in self._dict.items()
                      if v is not None])
+
+
+def generate_docstring(name, bases, attrs):
+    if not '__doc__' in attrs:
+        docstring = []
+        plural = name.lower()[:-4] + 's'
+        docstring.append("Item definition for {}".format(plural))
+        docstring.append('')
+        if 'fixed' in attrs:
+            docstring.append('Fixed values:')
+            docstring.append('')
+            for k, v in attrs['fixed'].items():
+                docstring.append(k)
+                explanation=EXPLANATIONS.get(k)
+                if explanation is None:
+                    explanation = ''
+                explanation += ' (**Fixed value**: {v}).'.format(
+                        v=repr(v))
+                docstring.append(
+                '    {explanation}'.format(explanation=explanation))
+                docstring.append('')
+        if 'defaults' in attrs:
+            docstring.append('Available values:')
+            docstring.append('')
+            for k, v in attrs['defaults'].items():
+                docstring.append(k)
+                explanation=EXPLANATIONS.get(k)
+                if explanation is None:
+                    explanation = 'Optional.'
+                if v is not None:
+                    explanation += ' (**Default value**: {v}).'.format(
+                        v=repr(v))
+                docstring.append(
+                '    {explanation}'.format(explanation=explanation))
+                docstring.append('')
+
+        attrs['__doc__'] = '\n'.join(docstring)
+    return type(name, bases, attrs)
+
+
+class HeadingItem(BaseItem):
+    __metaclass__ = generate_docstring
+    fixed = {'menu_type': 'heading'}
+    defaults = {'name': None,
+                'description': None,
+                'heading_level': DEFAULT_HEADING_LEVEL,
+                'extra_data': None,
+                'klass': None}
