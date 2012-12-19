@@ -92,6 +92,7 @@ class LayerItem(BaseItem):
     """Wrapper/interface for layer/acceptable objects in a LayerTree/menu."""
     __metaclass__ = generate_docstring
     fixed = {'menu_type': 'workspace_acceptable'}
+    # Why does a layer item know about WMS?
     defaults = {'name': None,
                 'description': None,
                 'wms_url': None,
