@@ -34,3 +34,6 @@ class HeadingItemTest(TestCase):
     def test_fail_on_unknown_arguments(self):
         self.assertRaises(TypeError, items.HeadingItem, reinout='great')
         # TypeError: __init__() got an unexpected keyword argument 'reinout'
+
+    def test_has_generated_docstring(self):
+        self.assertTrue(items.HeadingItem.__doc__)

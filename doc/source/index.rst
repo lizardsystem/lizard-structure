@@ -26,4 +26,5 @@ Here is the table of contents:
 
    core
    views
+   items
    project

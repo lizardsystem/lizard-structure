@@ -72,44 +72,50 @@ class BaseItem(object):
 
 
 def generate_docstring(name, bases, attrs):
-    if not '__doc__' in attrs:
-        docstring = []
-        plural = name.lower()[:-4] + 's'
-        docstring.append("Item definition for {}".format(plural))
-        docstring.append('')
-        if 'fixed' in attrs:
-            docstring.append('Fixed values:')
-            docstring.append('')
-            for k, v in attrs['fixed'].items():
-                docstring.append(k)
-                explanation=EXPLANATIONS.get(k)
-                if explanation is None:
-                    explanation = ''
-                explanation += ' (**Fixed value**: {v}).'.format(
-                        v=repr(v))
-                docstring.append(
-                '    {explanation}'.format(explanation=explanation))
-                docstring.append('')
-        if 'defaults' in attrs:
-            docstring.append('Available values:')
-            docstring.append('')
-            for k, v in attrs['defaults'].items():
-                docstring.append(k)
-                explanation=EXPLANATIONS.get(k)
-                if explanation is None:
-                    explanation = 'Optional.'
-                if v is not None:
-                    explanation += ' (**Default value**: {v}).'.format(
-                        v=repr(v))
-                docstring.append(
-                '    {explanation}'.format(explanation=explanation))
-                docstring.append('')
+    """Generate a docstring based on the class's defaults/fixed attributes.
 
-        attrs['__doc__'] = '\n'.join(docstring)
+    Use this function as a metaclass by adding ``__metaclass__ =
+    generate_docstring`` to every individual subclass of :class:`BaseItem`.
+    """
+    if not '__doc__' in attrs:
+        plural = name.lower()[:-4] + 's'
+        attrs['__doc__'] = "Item definition for {}".format(plural)
+    docstring = []
+    docstring.append('\n\n')
+    if 'fixed' in attrs:
+        docstring.append('Fixed values:')
+        docstring.append('')
+        for k, v in attrs['fixed'].items():
+            docstring.append(k)
+            explanation=EXPLANATIONS.get(k)
+            if explanation is None:
+                explanation = ''
+            explanation += ' (**Fixed value**: {v}).'.format(
+                    v=repr(v))
+            docstring.append(
+            '    {explanation}'.format(explanation=explanation))
+            docstring.append('')
+    if 'defaults' in attrs:
+        docstring.append('Available values:')
+        docstring.append('')
+        for k, v in attrs['defaults'].items():
+            docstring.append(k)
+            explanation=EXPLANATIONS.get(k)
+            if explanation is None:
+                explanation = 'Optional.'
+            if v is not None:
+                explanation += ' (**Default value**: {v}).'.format(
+                    v=repr(v))
+            docstring.append(
+            '    {explanation}'.format(explanation=explanation))
+            docstring.append('')
+
+    attrs['__doc__'] += '\n'.join(docstring)
     return type(name, bases, attrs)
 
 
 class HeadingItem(BaseItem):
+    """Wrapper/interface for heading objects in a Project/menu."""
     __metaclass__ = generate_docstring
     fixed = {'menu_type': 'heading'}
     defaults = {'name': None,
@@ -117,3 +123,15 @@ class HeadingItem(BaseItem):
                 'heading_level': DEFAULT_HEADING_LEVEL,
                 'extra_data': None,
                 'klass': None}
+
+
+class LayerItem(BaseItem):
+    """Wrapper/interface for layer/acceptable objects in a Project/menu."""
+    __metaclass__ = generate_docstring
+    fixed = {'menu_type': 'workspace_acceptable'}
+    defaults = {'name': None,
+                'description': None,
+                'wms_url': None,
+                'wms_params': None,
+                'wms_options': None,
+                }
