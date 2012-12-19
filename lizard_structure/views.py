@@ -42,6 +42,21 @@ class BaseAPIView(GenericAPIView):
     """
 
     def get_description(self, html=False):
+        """Return the description, optionally as html."""
+
+        if html:
+            return self._get_html_description()
+        return self._get_description()
+
+    def _get_html_description(self):
+        """Render the description as html."""
+
+        description = self.get_description()
+        parts = docutils.core.publish_parts(
+            description, writer_name='html')
+        return mark_safe(parts['fragment'])
+
+    def _get_description(self):
         """Return the view's docstring as a description.
 
         This method is a customization of Django REST framework's. There are
@@ -56,6 +71,7 @@ class BaseAPIView(GenericAPIView):
           markdown (markdown is preferred by Django REST framework).
 
         """
+
         description = self.__doc__
         if description is None:
             # Trick to get our parent's docstring as a fallback if we don't
@@ -67,21 +83,15 @@ class BaseAPIView(GenericAPIView):
                     if cls.__doc__ is not None)
             except StopIteration:
                 pass
-
-        description = trim_docstring(description)
-        if html:
-            parts = docutils.core.publish_parts(description,
-                                                writer_name='html')
-            return mark_safe(parts['fragment'])
-        return description
+        return trim_docstring(description)
 
 
 class DataSourceView(BaseAPIView):
     """
     Information about the data source itself and its list of layer trees.
 
-    Use this to discover the layer trees you can show in your user interface. The
-    result is a dictionary with the following items:
+    Use this to discover the layer trees you can show in your user interface.
+    The result is a dictionary with the following items:
 
     about_ourselves
         Metadata about ourselves, like the software version that generated
