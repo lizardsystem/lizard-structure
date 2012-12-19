@@ -78,9 +78,9 @@ class BaseAPIView(GenericAPIView):
 
 class DataSourceView(BaseAPIView):
     """
-    Information about the data source itself and its list of projects.
+    Information about the data source itself and its list of layer trees.
 
-    Use this to discover the projects you can show in your user interface. The
+    Use this to discover the layer trees you can show in your user interface. The
     result is a dictionary with the following items:
 
     about_ourselves
@@ -88,19 +88,19 @@ class DataSourceView(BaseAPIView):
         it. Do not depend on the actual items in here, just display them when
         desired as background information.
 
-    projects
-        The list of available projects. A project is a collection of
+    layer_trees
+        The list of available layer trees. A layer tree is a collection of
         layers you can show on a map or in an overview.
 
     """
 
-    def projects(self):
-        """Return list of projects.
+    def layer_trees(self):
+        """Return list of layer trees.
 
         Overwrite this method in your subclass and return a list of
-        :class:`lizard_structure.items.ProjectItem` instances you create from
-        whatever constitutes a project in your own models. To give you an
-        idea, here are some example projects:
+        :class:`lizard_structure.items.LayerTreeItem` instances you create from
+        whatever constitutes a layer tree in your own models. To give you an
+        idea, here are some example layer trees:
 
         - Categories in lizard-wms/lizard-maptree.
 
@@ -131,17 +131,17 @@ class DataSourceView(BaseAPIView):
         return {'generator': self.our_name_and_version()}
 
     def get(self, request, format=None):
-        """Return about_ourselves and projects as REST response."""
+        """Return about_ourselves and layer trees as REST response."""
         result = {}
         result['about_ourselves'] = self.about_ourselves()
-        result['projects'] = [project.to_api() for project in self.projects()]
+        result['layer_trees'] = [layer_tree.to_api() for layer_tree in self.layer_trees()]
         # ^^^ TODO: do we want a dict here or do we grab .to_api() ourselves?
         return Response(result)
 
 
-class ProjectView(GenericAPIView):
+class LayerTreeView(GenericAPIView):
     """
-    Information about the project and its list of layers.
+    Information about the layer tree and its list of layers.
     """
     # Representation: some sort of sidebar structure/tree with menuitems or
     # workspaceacceptables.

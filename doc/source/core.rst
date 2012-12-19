@@ -17,14 +17,14 @@ Data source
     Lizard can connect to many kinds of data. A :ref:`data source` provides
     such a connection.
 
-Project
+Layer tree
 
     Within an :ref:`data source`, there will be one or more basic groups of
-    data. Every group of data is what we call a :ref:`project`.
+    data. Every group of data is what we call a :ref:`layer tree`.
 
 Layer
 
-    Every :ref:`project` has multiple layers in some sort of
+    Every :ref:`layer tree` has multiple layers in some sort of
     structure. A :ref:`layer` is most often a map layer, but it doesn't have
     to be.
 
@@ -59,24 +59,24 @@ So in the end, if a Lizard website connects to you via the lizard-structure
 API, Lizard connects with you as a data source.
 
 You, as a data surce, are the starting point for Lizard to talk to you. You'll
-give lizard a list of projects which it can display in its interface, for
+give lizard a list of layer trees which it can display in its interface, for
 instance.
 
 
-.. _project:
+.. _`layer tree`:
 
-Project
-=======
+Layer tree
+==========
 
-A project is a large-scale grouping of the data available in an :ref:`data
+A layer tree is a large-scale grouping of the data available in an :ref:`data
 source`. Do not have too many of these. As an example: if your data source
-provides water level measurements, a good project level might be the water
+provides water level measurements, a good layer tree level might be the water
 board or municipality or whatever you have as top-level customer. So every
-municipality becomes a :ref:`project`.
+municipality becomes a :ref:`layer tree`.
 
-The goal you need to keep in mind here is that a :ref:`project` often
+The goal you need to keep in mind here is that a :ref:`layer tree` often
 translates into a separate page in the Lizard web interface. If that is what
-you want: fine. If not: you need to re-think what you're calling a project.
+you want: fine. If not: you need to re-think what you're calling a layer tree.
 
 
 .. _layer:

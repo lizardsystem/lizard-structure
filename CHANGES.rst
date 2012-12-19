@@ -5,6 +5,8 @@ Changelog of lizard-structure
 0.2 (unreleased)
 ----------------
 
+- Renamed "project" to "layer tree" because it is clearer.
+
 - Added "item definitions" to properly document and specify items such as menu
   headers and projects. Their end result is a dictionary that will be returned
   as json by the API.

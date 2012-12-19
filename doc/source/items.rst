@@ -6,10 +6,10 @@ Item definitions: what key/value pairs to expect
 .. automodule:: lizard_structure.items
 
 
-Project
---------------
+Layer tree
+----------
 
-.. autoclass:: lizard_structure.items.ProjectItem
+.. autoclass:: lizard_structure.items.LayerTreeItem
 
 
 Heading in a menu

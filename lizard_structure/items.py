@@ -115,7 +115,7 @@ def generate_docstring(name, bases, attrs):
     return type(name, bases, attrs)
 
 
-class ProjectItem(BaseItem):
+class LayerTreeItem(BaseItem):
     __metaclass__ = generate_docstring
     defaults = {'name': None,
                 'description': None,
@@ -124,7 +124,7 @@ class ProjectItem(BaseItem):
 
 
 class HeadingItem(BaseItem):
-    """Wrapper/interface for heading objects in a Project/menu."""
+    """Wrapper/interface for heading objects in a LayerTree/menu."""
     __metaclass__ = generate_docstring
     fixed = {'menu_type': 'heading'}
     defaults = {'name': None,
@@ -136,7 +136,7 @@ class HeadingItem(BaseItem):
 
 
 class LayerItem(BaseItem):
-    """Wrapper/interface for layer/acceptable objects in a Project/menu."""
+    """Wrapper/interface for layer/acceptable objects in a LayerTree/menu."""
     __metaclass__ = generate_docstring
     fixed = {'menu_type': 'workspace_acceptable'}
     defaults = {'name': None,

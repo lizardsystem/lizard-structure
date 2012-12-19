@@ -16,7 +16,7 @@ Base view for a :ref:`data source`.
 
    There is one method you always have to implement:
 
-   .. automethod:: projects
+   .. automethod:: layer_trees
 
    If you want to return more information about ourselves than the default:
 
@@ -25,12 +25,12 @@ Base view for a :ref:`data source`.
    Normally, you should not have to modify or implement the other methods.
 
 
-TODO: Project view
-------------------
+TODO: Layer tree view
+---------------------
 
-Base view for a :ref:`project`.
+Base view for a :ref:`layer tree`.
 
-.. autoclass:: lizard_structure.views.ProjectView
+.. autoclass:: lizard_structure.views.LayerTreeView
    :members:
 
 
