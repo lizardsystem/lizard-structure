@@ -1,3 +1,5 @@
+.. _`chapter-views`:
+
 Django base views for implementing your API
 ===========================================
 
@@ -47,12 +49,4 @@ TODO: Feature view
 Base view for a :ref:`feature`.
 
 .. autoclass:: lizard_structure.views.FeatureView
-   :members:
-
-
-
-Helper base view
------------------
-
-.. autoclass:: lizard_structure.views.BaseAPIView
    :members:

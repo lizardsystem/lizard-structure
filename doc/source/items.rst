@@ -1,3 +1,5 @@
+.. _`chapter-items`:
+
 Item definitions: what key/value pairs to expect
 ================================================
 
@@ -13,16 +15,3 @@ Layer (workspace acceptable) in a menu
 --------------------------------------
 
 .. autoclass:: lizard_structure.items.LayerItem
-
-
-Base class for building item definitions
-----------------------------------------
-
-.. autoclass:: lizard_structure.items.BaseItem
-   :members:
-
-
-Helper function for generating item definition documentation
-------------------------------------------------------------
-
-.. autofunction:: lizard_structure.items.generate_docstring
