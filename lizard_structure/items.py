@@ -19,13 +19,10 @@ dictionary. It is implemented as a class for the following reasons:
 """
 from __future__ import unicode_literals
 
+from .docutils import generate_docstring
+
+
 DEFAULT_HEADING_LEVEL = 1
-EXPLANATIONS = {
-    'name': 'Name of the item',
-    'description': """Description of the item, perhaps shown when hovering
-    above it. HTML tags are allowed so you can add links or definition links.
-""",
-    }
 
 
 class BaseItem(object):
@@ -67,52 +64,8 @@ class BaseItem(object):
     def to_api(self):
         """Return our internal dictionary, but strip it of None values first.
         """
-        return dict([(k, v) for (k, v) in self._dict.items()
-                     if v is not None])
-
-
-def generate_docstring(name, bases, attrs):
-    """Generate a docstring based on the class's defaults/fixed attributes.
-
-    Use this function as a metaclass by adding ``__metaclass__ =
-    generate_docstring`` to every individual subclass of :class:`BaseItem`.
-    """
-    if not '__doc__' in attrs:
-        plural = name.lower()[:-4] + 's'
-        attrs['__doc__'] = "Item definition for {}".format(plural)
-    docstring = []
-    docstring.append('\n\n')
-    if 'fixed' in attrs:
-        docstring.append('Fixed values:')
-        docstring.append('')
-        for k, v in attrs['fixed'].items():
-            docstring.append(k)
-            explanation=EXPLANATIONS.get(k)
-            if explanation is None:
-                explanation = ''
-            explanation += ' (**Fixed value**: {v}).'.format(
-                    v=repr(v))
-            docstring.append(
-            '    {explanation}'.format(explanation=explanation))
-            docstring.append('')
-    if 'defaults' in attrs:
-        docstring.append('Available values:')
-        docstring.append('')
-        for k, v in attrs['defaults'].items():
-            docstring.append(k)
-            explanation=EXPLANATIONS.get(k)
-            if explanation is None:
-                explanation = 'Optional.'
-                # TODO: perhaps raise an exception? Force documentation?
-            if v is not None:
-                explanation += ' (**Default value**: {v}).'.format(
-                    v=repr(v))
-            docstring.append(
-            '    {explanation}'.format(explanation=explanation))
-            docstring.append('')
-
-    attrs['__doc__'] += '\n'.join(docstring)
-    return type(name, bases, attrs)
+        return dict((k, v) for (k, v) in self._dict.iteritems()
+                    if v is not None)
 
 
 class LayerTreeItem(BaseItem):
@@ -139,6 +92,7 @@ class LayerItem(BaseItem):
     """Wrapper/interface for layer/acceptable objects in a LayerTree/menu."""
     __metaclass__ = generate_docstring
     fixed = {'menu_type': 'workspace_acceptable'}
+    # Why does a layer item know about WMS?
     defaults = {'name': None,
                 'description': None,
                 'wms_url': None,
