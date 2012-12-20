@@ -30,14 +30,16 @@ copyright = '%s, %s' % (this_year, author)
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
-# -- General configuration -----------------------------------------------------
+# -- General configuration ----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
 
-# Add any Sphinx extension module names here, as strings. They can be extensions
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.viewcode']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx',
+              'sphinx.ext.todo', 'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -65,7 +67,7 @@ master_doc = 'index'
 # directories to ignore when looking for source files.
 exclude_patterns = []
 
-# The reST default role (used for this markup: `text`) to use for all documents.
+# The reST default role (used for this markup: `text`) to use for all documents
 #default_role = None
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
@@ -86,7 +88,7 @@ pygments_style = 'sphinx'
 #modindex_common_prefix = []
 
 
-# -- Options for HTML output ---------------------------------------------------
+# -- Options for HTML output --------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -166,7 +168,7 @@ html_last_updated_fmt = '%Y-%m-%d'
 htmlhelp_basename = '%sdoc' % project
 
 
-# -- Options for LaTeX output --------------------------------------------------
+# -- Options for LaTeX output -------------------------------------------------
 
 # The paper size ('letter' or 'a4').
 latex_paper_size = 'a4'
@@ -175,10 +177,10 @@ latex_paper_size = 'a4'
 latex_font_size = '11pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title, author, documentclass [howto/manual]).
+# (source start file, target name, title, author, documentclass [howto/manual])
 latex_documents = [
-  ('index', '%s.tex' % project, u'%s Documentation' % project,
-   author, 'manual'),
+    ('index', '%s.tex' % project, u'%s Documentation' % project,
+     author, 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

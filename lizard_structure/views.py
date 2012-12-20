@@ -80,8 +80,8 @@ class DataSourceView(BaseAPIView):
     """
     Information about the data source itself and its list of layer trees.
 
-    Use this to discover the layer trees you can show in your user interface. The
-    result is a dictionary with the following items:
+    Use this to discover the layer trees you can show in your user interface.
+    The result is a dictionary with the following items:
 
     about_ourselves
         Metadata about ourselves, like the software version that generated
@@ -134,7 +134,8 @@ class DataSourceView(BaseAPIView):
         """Return about_ourselves and layer trees as REST response."""
         result = {}
         result['about_ourselves'] = self.about_ourselves()
-        result['layer_trees'] = [layer_tree.to_api() for layer_tree in self.layer_trees()]
+        result['layer_trees'] = [layer_tree.to_api() for
+                                 layer_tree in self.layer_trees()]
         # ^^^ TODO: do we want a dict here or do we grab .to_api() ourselves?
         return Response(result)
 

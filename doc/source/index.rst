@@ -1,4 +1,5 @@
-Lizard-structure: how Lizard fits together
+
+Lizard-structure: The Lizard api
 ##########################################
 
 Tagline of this app: **structure of Lizard, defined and documented in a REST
@@ -24,6 +25,7 @@ Here is the table of contents:
 .. toctree::
    :maxdepth: 2
 
+   restapi
    core
    views
    items
