@@ -84,22 +84,22 @@ Get a list of Application Screens
     "data": [
       {
         "id": "{app id}",
-		"name": "{app name}",
-		"description": "{app description}",
-		"url": "/api/v1/portal/{app id}",
-		"icon": "/api/v1/icon/{icon id}",
-		"actionType": "lizard.app.xxxxx"
-	  },
+        "name": "{app name}",
+        "description": "{app description}",
+        "url": "/api/v1/portal/{app id}",
+        "icon": "/api/v1/icon/{icon id}",
+        "actionType": "lizard.app.xxxxx"
+      },
       {
-	    "id": '{app id2}",
-		"name": "{app name2}",
-		"description": "{app description}",
-		"url": "/api/v1/portal/{app id2}",
-		"icon": "/api/v1/icon/{icon id}",
-		"actionType": "linkTo"
-	  }
+        "id": "{app id2}",
+        "name": "{app name2}",
+	"description": "{app description}",
+	"url": "/api/v1/portal/{app id2}",
+	"icon": "/api/v1/icon/{icon id}",
+	"actionType": "linkTo"
+      }
     ],
-	"count": 1
+        "count": 1
    }
 
 Get a Application Screen
@@ -118,13 +118,13 @@ Get a Application Screen
   {
     "data": {
       "id": "{app id}",
-	  "name": "{app name}",
-	  "description": "{app description}",
-	  "url": "/api/v1/portal/{app id}",
-	  "icon": "/api/v1/icon/{icon id}",
-	  "actionType": "lizard.app.xxxxx"
-     }
-   }
+      "name": "{app name}",
+      "description": "{app description}",
+      "url": "/api/v1/portal/{app id}",
+      "icon": "/api/v1/icon/{icon id}",
+      "actionType": "lizard.app.xxxxx"
+    }
+  }
 
 Applications
 ===============
