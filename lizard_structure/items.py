@@ -1,4 +1,4 @@
-# (c) Nelen & Schuurmans.  MIT licensed, see LICENSE.rst.
+# (c) Nelen & Schuurmans.  LGPL licensed, see LICENSE.rst.
 """
 :mod:`lizard_structure.items` provides item definitions. An item definition is
 a formal specification of what kinds of key/value pairs you can expect in a

@@ -1,4 +1,4 @@
-# (c) Nelen & Schuurmans.  MIT licensed, see LICENSE.rst.
+# (c) Nelen & Schuurmans.  LGPL licensed, see LICENSE.rst.
 
 from django.test import TestCase
 from lizard_structure import items

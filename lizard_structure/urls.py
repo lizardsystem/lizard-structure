@@ -1,4 +1,4 @@
-# (c) Nelen & Schuurmans.  MIT licensed, see LICENSE.rst.
+# (c) Nelen & Schuurmans.  LGPL licensed, see LICENSE.rst.
 from django.conf import settings
 from django.conf.urls.defaults import include
 from django.conf.urls.defaults import patterns

@@ -1,4 +1,4 @@
-# (c) Nelen & Schuurmans.  MIT licensed, see LICENSE.rst.
+# (c) Nelen & Schuurmans.  LGPL licensed, see LICENSE.rst.
 """
 :mod:`lizard_structure.views` provides base views for each of the core
 concepts defined in :ref:`chapter-core`. The basic premise is that
