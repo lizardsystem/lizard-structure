@@ -99,7 +99,7 @@ Get a list of Application Screens
 	"actionType": "linkTo"
       }
     ],
-        "count": 1
+        "count": 2
    }
 
 Get a Application Screen
