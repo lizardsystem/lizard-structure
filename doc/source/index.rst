@@ -25,7 +25,6 @@ Here is the table of contents:
 .. toctree::
    :maxdepth: 2
 
-   restapi
    core
    views
    items
